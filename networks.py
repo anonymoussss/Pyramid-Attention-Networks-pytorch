@@ -28,15 +28,15 @@ class ResNet50(nn.Module):
 
         return feature_map, out
 
-class Classifier(nn.Module):
-    def __init__(self, in_features=2048, num_class=20):
-        super(Classifier, self).__init__()
-        self.fc1 = nn.Linear(in_features, num_class)
-        self.relu = nn.ReLU(inplace=True)
+#class Classifier(nn.Module):
+#    def __init__(self, in_features=2048, num_class=20):
+#        super(Classifier, self).__init__()
+#        self.fc1 = nn.Linear(in_features, num_class)
+#        self.relu = nn.ReLU(inplace=True)
 
-    def forward(self, x):
-        x = self.fc1(x)
-        return x
+#    def forward(self, x):
+#        x = self.fc1(x)
+#        return x
 
 class FPA(nn.Module):
     def __init__(self, channels=2048):
@@ -119,7 +119,7 @@ class FPA(nn.Module):
         x3_2 = self.conv3x3_2(x3_1)
         x3_2 = self.bn3_2(x3_2)
 
-        # Merge branch 1 and 2
+        # Merge branch 1 to 3
         x3_upsample = self.relu(self.bn_upsample_3(self.conv_upsample_3(x3_2)))
         x2_merge = self.relu(x2_2 + x3_upsample)
         x2_upsample = self.relu(self.bn_upsample_2(self.conv_upsample_2(x2_merge)))
